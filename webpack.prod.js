@@ -4,7 +4,7 @@ webpack;
 module.exports = {
     mode: "production",
     devtool: "source-map",
-    entry: ["./src/index.tsx"],
+    entry: ["./src/index.ts"],
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "index.js",
