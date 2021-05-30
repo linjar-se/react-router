@@ -1,5 +1,5 @@
+import { Router } from "@linears/react-router";
 import React from "react";
-import { Router } from "../src/";
 import About from "./routes/about";
 import Home from "./routes/home";
 import Posts from "./routes/posts";

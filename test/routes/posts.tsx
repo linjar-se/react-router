@@ -1,6 +1,5 @@
+import { Link, RouteProps } from "@linears/react-router";
 import React from "react";
-import { Link } from "../../src/";
-import { RouteProps } from "../../src/types";
 
 export default function Posts({ params }: RouteProps): React.ReactElement {
     return (

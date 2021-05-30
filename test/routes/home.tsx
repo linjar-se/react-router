@@ -1,5 +1,5 @@
+import { Link } from "@linears/react-router";
 import React from "react";
-import { Link } from "../../src/";
 
 export default function Home(): React.ReactElement {
     return (

@@ -1,5 +1,6 @@
+import { Link } from "@linears/react-router";
 import React from "react";
-import { Link } from "../../src";
+
 export default function About(): React.ReactElement {
     return (
         <div>
