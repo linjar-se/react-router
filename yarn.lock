@@ -509,8 +509,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@linears/react-router@./":
+"@linears/react-router@^1.0.0":
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@linears/react-router/-/react-router-1.0.0.tgz#d59affd8c6bca18f71ba035405e70c2d201c29bd"
+  integrity sha512-t8SpePauzT2d+xQq3x82yFErzyalDsLLg6Fzpnouq5xrJdY885bvLAeakEwqoKjIAmgfczZ9VDGjI7De3R//7w==
 
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
