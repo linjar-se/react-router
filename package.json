@@ -1,5 +1,5 @@
 {
-    "name": "linears-react-router",
+    "name": "@linears/react-router",
     "description": "Small yet effective React router",
     "version": "1.0.0",
     "license": "MIT",
@@ -26,6 +26,8 @@
         "@types/react": "^17.0.3",
         "@types/react-dom": "^17.0.3",
         "@typescript-eslint/eslint-plugin": "^4.25.0",
+        "@linears/react-router": "./",
+        "@typescript-eslint/parser": "^4.25.0",
         "eslint": "^7.24.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^3.4.0",
@@ -44,7 +46,7 @@
         "webpack-cli": "^4.6.0",
         "webpack-dev-server": "^3.11.2"
     },
-    "dependencies": {
-        "@typescript-eslint/parser": "^4.25.0"
-    }
+    "files": [
+        "./dist"
+    ]
 }
