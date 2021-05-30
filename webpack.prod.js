@@ -1,42 +1,37 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-
+const webpack = require("webpack");
+webpack;
 module.exports = {
     mode: "production",
-    entry: ["./test/index.tsx"],
+    devtool: "source-map",
+    entry: ["./src/index.tsx"],
     output: {
         path: path.resolve(__dirname, "dist"),
-        filename: "[name].[contenthash].js",
+        filename: "index.js",
         clean: true,
-        publicPath: "/",
+        library: {
+            type: "umd",
+        },
     },
     module: {
         rules: [
             {
-                test: /\.(ts|js)x?$/i,
-                use: "babel-loader",
+                test: /\.(ts)x?$/i,
+                use: "ts-loader",
             },
         ],
     },
     resolve: {
         extensions: [".tsx", ".ts", ".js", ".jsx"],
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: "./test/index.html",
-        }),
-    ],
-    optimization: {
-        moduleIds: "deterministic",
-        runtimeChunk: "single",
-        splitChunks: {
-            cacheGroups: {
-                vendor: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: "vendors",
-                    chunks: "all",
-                },
-            },
+    externals: {
+        react: {
+            commonjs: "react",
+            commonjs2: "react",
+        },
+        ReactDOM: {
+            commonjs: "react-dom",
+            commonjs2: "react-dom",
         },
     },
 };
