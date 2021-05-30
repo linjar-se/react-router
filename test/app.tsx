@@ -1,5 +1,27 @@
 import React from "react";
+import { Router } from "../src/";
+import About from "./routes/about";
+import Home from "./routes/home";
+import Posts from "./routes/posts";
 
 export default function App(): React.ReactElement {
-    return <div>React Router</div>;
+    return (
+        <Router
+            routes={[
+                {
+                    path: "/",
+                    component: Home,
+                },
+                {
+                    path: "/about",
+                    component: About,
+                },
+                {
+                    path: "/posts/:userId/:postId",
+                    component: Posts,
+                },
+            ]}
+            fallback={<div>404 - page not found</div>}
+        />
+    );
 }
