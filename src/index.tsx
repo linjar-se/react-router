@@ -1,9 +1,24 @@
-import React, { MouseEvent, useEffect, useState } from "react";
-import { LinkProps, MatchedRoute, Route, RouterProps } from "./types";
+import React, { ComponentType, HTMLAttributes, MouseEvent, ReactElement, useEffect, useState } from "react";
+
+export type Route<T = unknown> = T & {
+    path: string;
+    endpoints: {
+        endpoint: string;
+        dynamic: boolean;
+    }[];
+    component: ComponentType<RouteProps>;
+};
+
+export interface RouteProps {
+    params: { [key: string]: string };
+}
 
 let action: () => void;
 
-export function Link({ to: path, children }: LinkProps): React.ReactElement {
+export interface LinkProps extends HTMLAttributes<HTMLAnchorElement> {
+    to: string;
+}
+export function Link({ to: path, children }: LinkProps): ReactElement {
     function handleClick(ev: MouseEvent<HTMLAnchorElement>) {
         ev.preventDefault();
         history.pushState(null, "", path);
@@ -16,8 +31,14 @@ export function Link({ to: path, children }: LinkProps): React.ReactElement {
     );
 }
 
-export function Router(props: RouterProps): React.ReactElement<{ params: { [key: string]: string } }> | null {
-    // Initilize Router
+export interface RouterProps {
+    routes: {
+        path: string;
+        component: ComponentType<RouteProps>;
+    }[];
+    fallback?: ReactElement;
+}
+export function Router(props: RouterProps): ReactElement<{ params: { [key: string]: string } }> | null {
     const [, setState] = useState(0);
     useEffect(() => {
         action = () => setState((state) => state + 1);
@@ -57,6 +78,10 @@ function destructurePath(route: string) {
     return path.slice(1).split("/");
 }
 
+export interface MatchedRoute {
+    path: string;
+    component: ReactElement;
+}
 function matchRoute(routes: Route[]): MatchedRoute | null {
     const pathnameSegments = destructurePath(location.pathname);
     let params: { [key: string]: string } = {};
