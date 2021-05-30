@@ -20,10 +20,13 @@
     "scripts": {
         "start": "webpack serve --node-env development --config ./webpack.dev.js",
         "build": "webpack --node-env production --config ./webpack.prod.js",
-        "prepublish": "yarn run build"
+        "prepublishOnly": "yarn run build"
+    },
+    "peerDependencies": {
+        "react": ">=16.8.0"
     },
     "devDependencies": {
-        "@linears/react-router": "^1.0.0",
+        "@linears/react-router": "./",
         "@types/react": "^17.0.3",
         "@types/react-dom": "^17.0.3",
         "@typescript-eslint/eslint-plugin": "^4.25.0",
