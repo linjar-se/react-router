@@ -1,33 +1,31 @@
 {
-    "name": "linears-template",
-    "version": "0.0.1",
+    "name": "linears-react-router",
+    "description": "Small yet effective React router",
+    "version": "1.0.0",
     "license": "MIT",
+    "main": "dist/index.js",
+    "author": "Hamza Khuswan <hamzakhuswan@outlook.com> (https://hamzakhuswan.com)",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/linears-io/react-router.git"
+    },
+    "keywords": [
+        "React",
+        "router"
+    ],
+    "bugs": {
+        "url": "https://github.com/linears-io/react-router/issues"
+    },
+    "homepage": "https://github.com/linears-io/react-router#readme",
     "scripts": {
         "start": "webpack serve --node-env development --config ./webpack.dev.js",
         "build": "webpack --node-env production --config ./webpack.prod.js",
-        "eslint": "eslint",
-        "test": "jest --watch"
-    },
-    "dependencies": {
-        "react": "^17.0.2",
-        "react-dom": "^17.0.2"
+        "eslint": "eslint"
     },
     "devDependencies": {
-        "@babel/core": "^7.13.16",
-        "@babel/plugin-transform-runtime": "^7.13.15",
-        "@babel/preset-env": "^7.13.15",
-        "@babel/preset-react": "^7.13.13",
-        "@babel/preset-typescript": "^7.13.0",
-        "@babel/runtime": "^7.13.17",
-        "@testing-library/jest-dom": "^5.12.0",
-        "@testing-library/react": "^11.2.6",
-        "@types/jest": "^26.0.22",
         "@types/react": "^17.0.3",
         "@types/react-dom": "^17.0.3",
         "@typescript-eslint/eslint-plugin": "^4.25.0",
-        "@typescript-eslint/parser": "^4.22.0",
-        "autoprefixer": "^10.2.5",
-        "babel-loader": "^8.2.2",
         "eslint": "^7.24.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-prettier": "^3.4.0",
@@ -38,11 +36,15 @@
         "html-webpack-plugin": "^5.3.1",
         "jest": "^26.6.3",
         "prettier": "^2.2.1",
-        "react-test-renderer": "^17.0.2",
-        "ts-node": "^9.1.1",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "ts-loader": "^9.2.2",
         "typescript": "^4.2.4",
         "webpack": "^5.35.0",
         "webpack-cli": "^4.6.0",
         "webpack-dev-server": "^3.11.2"
+    },
+    "dependencies": {
+        "@typescript-eslint/parser": "^4.25.0"
     }
 }
