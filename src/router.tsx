@@ -10,15 +10,10 @@ export type Route<T = {}> = T & {
     path: string;
     component: ComponentType<RouteProps>;
     condition?: boolean;
-    loadingComponent?: ReactElement;
+    loadingComponent?: ReactElement | ComponentType;
     loading?: boolean;
     redirectPath?: string;
 };
-
-// if condition is false -> if loading is false -> redirect;
-// if condition is false -> if loading is true -> render loadingComponent
-// if condition is true -> if loading is false -> render component
-// if condition is true -> if loading is true -> render loadingComponent
 
 export interface RouterProps {
     routes: Route[];
@@ -86,10 +81,12 @@ function matchRoute(routes: Route[]): Route<RouteProps> | null {
 }
 
 function CondtionalRoute({ route }: { route: Route<RouteProps> }): ReactElement | null {
-    const { component: Component, loadingComponent } = route;
+    const { component: Component, loadingComponent: LoadingComponent } = route;
     // If condtion is specified or it is true and not loading
     if (route.condition == null || (route.condition && !route.loading)) return <Component params={route.params} />;
-    else if (route.loading) return loadingComponent ? loadingComponent : null;
-    else if (!route.condition && route.redirectPath) return <Redirect to={route.redirectPath} />;
+    else if (route.loading) {
+        if (LoadingComponent) return typeof LoadingComponent === "function" ? <LoadingComponent /> : LoadingComponent;
+        else return null;
+    } else if (!route.condition && route.redirectPath) return <Redirect to={route.redirectPath} />;
     else return null;
 }
