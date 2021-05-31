@@ -4,6 +4,7 @@
     "version": "1.0.0",
     "license": "MIT",
     "main": "dist/index.js",
+    "types": "dist/types/index.d.ts",
     "author": "Hamza Khuswan <hamzakhuswan@outlook.com> (https://hamzakhuswan.com)",
     "repository": {
         "type": "git",

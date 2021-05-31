@@ -1,4 +1,2 @@
-import Link from "./link";
-import Router from "./router";
-
-export default { Router, Link };
+export * from "./link";
+export * from "./router";

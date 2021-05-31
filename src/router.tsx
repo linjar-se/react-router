@@ -22,7 +22,7 @@ export interface RouterProps {
     routes: Route[];
     fallback?: ReactElement;
 }
-export default function Router(props: RouterProps): ReactElement<RouteProps> | null {
+export function Router(props: RouterProps): ReactElement<RouterProps> {
     const [, update] = useState(0);
     // Function that change Route state for renderering
     const forceUpdate = () => update((state) => state + 1);
