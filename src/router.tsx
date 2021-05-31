@@ -1,6 +1,6 @@
 import React, { ComponentType, ReactElement, useEffect, useState } from "react";
-import { Redirect } from "./redirect";
 import RouterContext from "./routerContext";
+import { useRouter } from "./useRouter";
 
 export interface RouteProps {
     params: { [key: string]: string };
@@ -82,11 +82,14 @@ function matchRoute(routes: Route[]): Route<RouteProps> | null {
 
 function CondtionalRoute({ route }: { route: Route<RouteProps> }): ReactElement | null {
     const { component: Component, loadingComponent: LoadingComponent } = route;
+    const { push } = useRouter();
+
     // If condtion is specified or it is true and not loading
     if (route.condition == null || (route.condition && !route.loading)) return <Component params={route.params} />;
     else if (route.loading) {
         if (LoadingComponent) return typeof LoadingComponent === "function" ? <LoadingComponent /> : LoadingComponent;
         else return null;
-    } else if (!route.condition && route.redirectPath) return <Redirect to={route.redirectPath} />;
-    else return null;
+    } else if (!route.condition && route.redirectPath) push(route.redirectPath);
+
+    return null;
 }
