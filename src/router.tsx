@@ -1,23 +1,25 @@
 import React, { ComponentType, ReactElement, useEffect, useState } from "react";
+import { Redirect } from "./redirect";
 import RouterContext from "./routerContext";
-// export type Route<T = unknown> = T & {
-//     path: string;
-//     endpoints: {
-//         endpoint: string;
-//         dynamic: boolean;
-//     }[];
-//     component: ComponentType<RouteProps>;
-// };
 
 export interface RouteProps {
     params: { [key: string]: string };
 }
-interface Route {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export type Route<T = {}> = T & {
     path: string;
-    condition: Promise<boolean> | (() => boolean) | boolean | null;
-    while: ComponentType;
     component: ComponentType<RouteProps>;
-}
+    condition?: boolean;
+    loadingComponent?: ReactElement;
+    loading?: boolean;
+    redirectPath?: string;
+};
+
+// if condition is false -> if loading is false -> redirect;
+// if condition is false -> if loading is true -> render loadingComponent
+// if condition is true -> if loading is false -> render component
+// if condition is true -> if loading is true -> render loadingComponent
+
 export interface RouterProps {
     routes: Route[];
     fallback?: ReactElement;
@@ -44,7 +46,7 @@ export function Router(props: RouterProps): ReactElement<RouterProps> {
 
     return (
         <RouterContext.Provider value={{ forceUpdate }}>
-            {route ? route.component : props.fallback ? props.fallback : null}
+            {route ? <CondtionalRoute route={route} /> : props.fallback ? props.fallback : null}
         </RouterContext.Provider>
     );
 }
@@ -54,11 +56,7 @@ function destructurePath(route: string) {
     return path.slice(1).split("/");
 }
 
-export interface MatchedRoute {
-    path: string;
-    component: ReactElement;
-}
-function matchRoute(routes: Route[]): MatchedRoute | null {
+function matchRoute(routes: Route[]): Route<RouteProps> | null {
     const pathnameSegments = destructurePath(location.pathname);
     let params: { [key: string]: string } = {};
 
@@ -82,10 +80,16 @@ function matchRoute(routes: Route[]): MatchedRoute | null {
                 : endpoint === pathnameSegments[index],
         );
     });
-    if (route) {
-        const Component = route.component;
-        // Pas params to component
-        const component = <Component params={params} />;
-        return { ...route, component };
-    } else return null;
+
+    if (route) return { ...route, params };
+    else return null;
+}
+
+function CondtionalRoute({ route }: { route: Route<RouteProps> }): ReactElement | null {
+    const { component: Component, loadingComponent } = route;
+    // If condtion is specified or it is true and not loading
+    if (route.condition == null || (route.condition && !route.loading)) return <Component params={route.params} />;
+    else if (route.loading) return loadingComponent ? loadingComponent : null;
+    else if (!route.condition) return route.redirectPath ? <Redirect to={route.redirectPath} /> : <Redirect to="/" />;
+    else return null;
 }
