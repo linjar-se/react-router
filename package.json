@@ -1,7 +1,7 @@
 {
     "name": "@linears/react-router",
     "description": "Small yet effective React router",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "license": "MIT",
     "main": "dist/index.js",
     "types": "dist/types/index.d.ts",
