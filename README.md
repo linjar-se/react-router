@@ -53,15 +53,17 @@ import { Link } from "@linears/react-router";
 const MyLink = () => <Link to="/path/to/other/router">About</Link>;
 ```
 
-## Redirect Component
+## useRouter hook
 
-The `Redirect` takes the path in `to` prop and it will redirect to the path without refreshing the page.
+The `useRouter` allows you to change the route.
 
 ```tsx
-import { Redirect } from "@linears/react-router";
+import { useRouter } from "@linears/react-router";
 
-// Redirect somewhere
-const Component = () => <Redirect to="/path/to/other/router" />;
+const Component = () => {
+    const router = useRouter();
+    return <button onClick={() => router.push("/path/to/somewhere")} />;
+};
 ```
 
 # Use cases
@@ -95,6 +97,8 @@ const App = () => (
     />
 );
 ```
+
+The example aboce will redirect to `/about`, because the route condition has not been met and it is not loading.
 
 ## Rendering dynamic routes
 
