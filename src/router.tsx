@@ -90,6 +90,6 @@ function CondtionalRoute({ route }: { route: Route<RouteProps> }): ReactElement 
     // If condtion is specified or it is true and not loading
     if (route.condition == null || (route.condition && !route.loading)) return <Component params={route.params} />;
     else if (route.loading) return loadingComponent ? loadingComponent : null;
-    else if (!route.condition) return route.redirectPath ? <Redirect to={route.redirectPath} /> : <Redirect to="/" />;
+    else if (!route.condition && route.redirectPath) return <Redirect to={route.redirectPath} />;
     else return null;
 }
